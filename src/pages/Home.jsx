@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchPosts } from "../utils/fetchPosts";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
+import NewPost from "../components/NewPost";
 const Home = () => {
 	const [page, setPage] = useState(1);
 
@@ -22,9 +23,10 @@ const Home = () => {
 	console.log(data);
 	return (
 		<div className="w-11/12 mx-auto">
+			<NewPost />
 			<div className="flex justify-between items-center">
 				<button
-					className="btn  btn-error"
+					className="btn btn-error"
 					onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
 					disabled={page === 1}
 				>
@@ -35,9 +37,15 @@ const Home = () => {
 					NEXT
 				</button>
 			</div>
-			{data?.map((post) => {
-				return <Card post={post} key={post.id} />;
-			})}
+			{data.length !== 0 ? (
+				data?.map((post) => {
+					return <Card post={post} key={post.id} />;
+				})
+			) : (
+				<h1 className="text-2xl font-medium h-24 flex items-center justify-center">
+					No Posts found
+				</h1>
+			)}
 		</div>
 	);
 };

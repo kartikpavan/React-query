@@ -4,7 +4,7 @@ const Card = ({ post }) => {
 	return (
 		<Link
 			to={`/post/${post.id}`}
-			className="card w-full bg-primary-content text-secondary-content my-3 shadow-xl hover:scale-105 duration-300"
+			className="card w-full bg-primary-content text-secondary-content my-3 shadow-xl hover:bg-secondary hover:text-neutral duration-300"
 		>
 			<div className="card-body">
 				<div className="flex justify-between ">

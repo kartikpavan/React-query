@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSinglePost } from "../utils/fetchSinglePost";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Loader from "../components/Loader";
+import Card from "../components/Card";
 
 const Post = () => {
-	const navigate = useNavigate();
 	const { postId } = useParams();
 
 	const { data, isLoading, isError, error } = useQuery(
@@ -30,16 +30,7 @@ const Post = () => {
 	return (
 		<div className="w-11/12 mx-auto">
 			SINGLE POST
-			<div className="card w-full bg-secondary-content text-primary-content my-3 shadow-xl ">
-				<div className="card-body">
-					<div className="flex justify-between ">
-						<h1>userID: {data.user_id}</h1>
-						<h1>postID: {data.id}</h1>
-					</div>
-					<h1 className="card-title">{data.title}</h1>
-					<p>{data.body}</p>
-				</div>
-			</div>
+			<Card post={data} />
 			<Link to="/" className="link ">
 				Back to Home page
 			</Link>
