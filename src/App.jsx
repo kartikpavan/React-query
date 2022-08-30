@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Post from "./pages/Post";
 
 const App = () => {
 	const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ const App = () => {
 				<h1 className="text-3xl text-center">React Query</h1>
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/post/:postId" element={<Post />} />
 				</Routes>
 			</div>
 			<ReactQueryDevtools initialIsOpen={false} />

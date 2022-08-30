@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import fetchPosts from "../utils/fetchPosts";
+import { fetchPosts } from "../utils/fetchPosts";
+import Card from "../components/Card";
+import Loader from "../components/Loader";
 const Home = () => {
 	const [page, setPage] = useState(1);
 
@@ -8,7 +10,12 @@ const Home = () => {
 		keepPreviousData: true,
 	});
 
-	if (isLoading) return <h1> LOADING...</h1>;
+	if (isLoading)
+		return (
+			<h1 className="w-full h-screen flex items-center justify-center">
+				<Loader />
+			</h1>
+		);
 
 	if (isError) return <h1>Something went Wrong {error}</h1>;
 
@@ -29,21 +36,7 @@ const Home = () => {
 				</button>
 			</div>
 			{data?.map((post) => {
-				return (
-					<div
-						key={post.id}
-						className="card w-full bg-primary-content text-secondary-content my-3 shadow-xl"
-					>
-						<div className="card-body">
-							<div className="flex justify-between ">
-								<h1>userID: {post.user_id}</h1>
-								<h1>postID: {post.id}</h1>
-							</div>
-							<h1 className="card-title">{post.title}</h1>
-							<p>{post.body}</p>
-						</div>
-					</div>
-				);
+				return <Card post={post} key={post.id} />;
 			})}
 		</div>
 	);
