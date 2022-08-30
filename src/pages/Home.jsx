@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchPosts from "../utils/fetchPosts";
-import { useParams, useNavigate } from "react-router-dom";
 const Home = () => {
-	const { id } = useParams();
-	const pageId = parseInt(id);
-	const [page, setPage] = useState(pageId);
+	const [page, setPage] = useState(1);
 
 	const { data, isLoading, isError, error } = useQuery(["posts", page], () => fetchPosts(page), {
 		keepPreviousData: true,
@@ -18,7 +15,7 @@ const Home = () => {
 	console.log(data);
 	return (
 		<div className="w-11/12 mx-auto">
-			<div className="flex justify-between">
+			<div className="flex justify-between items-center">
 				<button
 					className="btn  btn-error"
 					onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
@@ -26,6 +23,7 @@ const Home = () => {
 				>
 					PREV
 				</button>
+				<h1>Current Page : {page}</h1>
 				<button className="btn btn-success" onClick={() => setPage((prev) => prev + 1)}>
 					NEXT
 				</button>

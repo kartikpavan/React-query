@@ -18,7 +18,7 @@ const App = () => {
 			<div className="container mx-auto px-4">
 				<h1 className="text-3xl text-center">React Query</h1>
 				<Routes>
-					<Route path="/:id" element={<Home />} />
+					<Route path="/" element={<Home />} />
 				</Routes>
 			</div>
 			<ReactQueryDevtools initialIsOpen={false} />
